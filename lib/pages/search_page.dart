@@ -19,29 +19,47 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) {
-        return RestaurantProvider(apiService: ApiService());
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              _buildSearch(context),
-              Expanded(
-                child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 16,
-                      left: 16,
-                      right: 16,
-                    ),
-                    child: _buildList()),
-              ),
-            ],
-          ),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildSearch(context),
+            Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 16,
+                    left: 16,
+                    right: 16,
+                  ),
+                  child: _buildList()),
+            ),
+          ],
         ),
       ),
     );
+    // return ChangeNotifierProvider(
+    //   create: (context) {
+    //     return RestaurantProvider(apiService: ApiService());
+    //   },
+    //   child: Scaffold(
+    //     body: SafeArea(
+    //       child: Column(
+    //         children: [
+    //           _buildSearch(context),
+    //           Expanded(
+    //             child: Padding(
+    //                 padding: const EdgeInsets.only(
+    //                   top: 16,
+    //                   left: 16,
+    //                   right: 16,
+    //                 ),
+    //                 child: _buildList()),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _buildList() {
