@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 const Color primaryColor = Color(0xff3870F5);
 const Color darkGrey = Color(0xffC6C6C6);
+const Color lightGrey = Color(0xffF8F8F8);
 
 final poppinsTextTheme = TextTheme(
   displayLarge: GoogleFonts.poppins(

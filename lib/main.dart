@@ -17,42 +17,43 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => RestaurantProvider(
-              apiService: ApiService(),
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => RestaurantProvider(
+            apiService: ApiService(),
+          ),
+        ),
+      ],
+      builder: (context, child) => MaterialApp(
+        title: "Restoku App",
+        theme: ThemeData(
+          colorScheme: Theme.of(context).colorScheme.copyWith(
+                primary: Colors.black,
+                secondary: primaryColor,
+              ),
+          scaffoldBackgroundColor: Colors.white,
+          textTheme: poppinsTextTheme,
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            color: Colors.black,
+            surfaceTintColor: Colors.black,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
             ),
           ),
-        ],
-        builder: (context, child) => MaterialApp(
-              title: "Restoku App",
-              theme: ThemeData(
-                colorScheme: Theme.of(context).colorScheme.copyWith(
-                      primary: primaryColor,
-                      secondary: primaryColor,
-                    ),
-                scaffoldBackgroundColor: Colors.white,
-                textTheme: poppinsTextTheme,
-                appBarTheme: const AppBarTheme(
-                  elevation: 0,
-                  color: Colors.white,
-                  surfaceTintColor: Colors.white,
-                ),
-                elevatedButtonTheme: ElevatedButtonThemeData(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
-              ),
-              initialRoute: '/',
-              routes: {
-                '/': (context) => const HomePage(),
-                '/restaurant': (context) => const RestaurantPage(),
-                '/search': (context) => const SearchPage(),
-              },
-            ));
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const HomePage(),
+          '/restaurant': (context) => const RestaurantPage(),
+          '/search': (context) => const SearchPage(),
+        },
+      ),
+    );
   }
 }
