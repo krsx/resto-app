@@ -3,6 +3,7 @@ import 'package:flutter_resto_app/data/api/api_service.dart';
 import 'package:flutter_resto_app/pages/home_page.dart';
 import 'package:flutter_resto_app/pages/restaurant_detail_page.dart';
 import 'package:flutter_resto_app/pages/search_page.dart';
+import 'package:flutter_resto_app/provider/detail_restaurant_provider.dart';
 import 'package:flutter_resto_app/provider/restaurant_provider.dart';
 import 'package:flutter_resto_app/utilities/style.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,14 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const HomePage(),
-          '/restaurant': (context) => const RestaurantPage(),
+          '/restaurant': (context) {
+            final id = ModalRoute.of(context)?.settings.arguments as String;
+            return ChangeNotifierProvider(
+              create: (context) =>
+                  DetailRestaurantProvider(apiService: ApiService(), id: id),
+              child: const RestaurantDetailPage(),
+            );
+          },
           '/search': (context) => const SearchPage(),
         },
       ),

@@ -10,7 +10,13 @@ class RestaurantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: Colors.transparent,
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          '/restaurant',
+          arguments: restaurant.id,
+        );
+      },
       child: Card(
         color: Colors.white,
         elevation: 0,
