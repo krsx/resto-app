@@ -35,7 +35,7 @@ class RestaurantCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,13 +44,13 @@ class RestaurantCard extends StatelessWidget {
                     restaurant.name,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Icon(
                         Icons.location_on,
-                        size: 20,
+                        size: 16,
                         color: Colors.grey,
                       ),
                       const SizedBox(width: 4),
@@ -77,7 +77,10 @@ class RestaurantCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         restaurant.rating.toString(),
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w400),
                       ),
                     ],
                   )

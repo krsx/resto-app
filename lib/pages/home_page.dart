@@ -47,9 +47,15 @@ class _HomePageState extends State<HomePage> {
 
   SliverAppBar _buildAppBar(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 175,
+      surfaceTintColor: Colors.white,
+      elevation: 0,
+      backgroundColor: Colors.white,
+      expandedHeight: 125,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
+        background: Container(
+          color: Colors.white,
+        ),
         titlePadding: const EdgeInsets.only(
           left: 16,
           bottom: 16,
@@ -59,7 +65,7 @@ class _HomePageState extends State<HomePage> {
           style: Theme.of(context)
               .textTheme
               .displaySmall
-              ?.copyWith(color: Colors.white),
+              ?.copyWith(color: Colors.black),
         ),
       ),
       actions: [
@@ -69,7 +75,8 @@ class _HomePageState extends State<HomePage> {
           },
           icon: const Icon(
             Icons.search,
-            color: Colors.white,
+            size: 28,
+            color: Colors.black,
           ),
         ),
       ],
@@ -90,7 +97,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(
               left: 16,
               right: 16,
-              top: 32,
+              top: 20,
             ),
             child: _buildList(),
           ),
