@@ -16,22 +16,18 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Consumer<PageProvider>(
-        builder: (context, state, child) {
-          switch (state.selectedIndex) {
-            case 0:
-              return HomePage();
-            case 1:
-              return FavoritePage();
-            case 2:
-              return SettingsPage();
-            default:
-              return HomePage();
-          }
-        },
-      )),
-      bottomNavigationBar: Consumer<PageProvider>(
-        builder: (context, state, child) => BottomNavigationBar(
+      body: SafeArea(
+        child: _handleBottomNavBar(),
+      ),
+      bottomNavigationBar: _buildNavBar(),
+    );
+  }
+
+  Consumer<PageProvider> _buildNavBar() {
+    return Consumer<PageProvider>(
+      builder: (context, state, child) => Container(
+        height: 72,
+        child: BottomNavigationBar(
           backgroundColor: Colors.black,
           selectedIconTheme: const IconThemeData(color: Colors.white),
           unselectedIconTheme: const IconThemeData(color: Colors.grey),
@@ -57,6 +53,23 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Consumer<PageProvider> _handleBottomNavBar() {
+    return Consumer<PageProvider>(
+      builder: (context, state, child) {
+        switch (state.selectedIndex) {
+          case 0:
+            return HomePage();
+          case 1:
+            return FavoritePage();
+          case 2:
+            return SettingsPage();
+          default:
+            return HomePage();
+        }
+      },
     );
   }
 }

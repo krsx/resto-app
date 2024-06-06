@@ -1,4 +1,4 @@
-class Restaurant {
+class ListRestaurantItem {
   String id;
   String name;
   String description;
@@ -6,7 +6,7 @@ class Restaurant {
   String city;
   double rating;
 
-  Restaurant({
+  ListRestaurantItem({
     required this.id,
     required this.name,
     required this.description,
@@ -15,7 +15,8 @@ class Restaurant {
     required this.rating,
   });
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
+  factory ListRestaurantItem.fromJson(Map<String, dynamic> json) =>
+      ListRestaurantItem(
         id: json["id"],
         name: json["name"],
         description: json["description"],

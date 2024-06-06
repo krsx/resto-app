@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_resto_app/data/model/detail_restaurant.dart';
+import 'package:flutter_resto_app/data/model/restaurant.dart';
+import 'package:flutter_resto_app/provider/database_provider.dart';
 import 'package:flutter_resto_app/provider/detail_restaurant_provider.dart';
 import 'package:flutter_resto_app/provider/result_state.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,15 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+      ),
+      floatingActionButton: Consumer<DetailRestaurantProvider>(
+        builder: (context, state, child) {
+          if (state.state == ResultState.HasData) {
+            return handleFavoriteButton(state.detailRestaurant.restaurant);
+          } else {
+            return const SizedBox();
+          }
+        },
       ),
       body: SafeArea(
         child: Consumer<DetailRestaurantProvider>(
@@ -78,7 +89,46 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
     );
   }
 
-  Row _buildHeadline(Restaurant restaurant, BuildContext context) {
+  Widget handleFavoriteButton(DetaiLRestaurantItem restaurant) {
+    return Consumer<DatabaseProvider>(
+      builder: (context, provider, child) {
+        return FutureBuilder(
+          future: provider.getFavoriteRestoById(restaurant.id),
+          builder: (context, snapshot) {
+            final isFavorite = snapshot.data ?? false;
+            return SizedBox(
+              width: 64,
+              height: 64,
+              child: FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(1000),
+                ),
+                backgroundColor: Colors.black,
+                onPressed: () {
+                  if (isFavorite) {
+                    provider.removeFavoriteResto(restaurant.id);
+                  } else {
+                    provider.insertFavoriteResto(
+                      ListRestaurantItem.fromJson(
+                        restaurant.toJson(),
+                      ),
+                    );
+                  }
+                },
+                child: Icon(
+                  size: 28,
+                  Icons.favorite,
+                  color: isFavorite ? Colors.red : Colors.grey,
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Row _buildHeadline(DetaiLRestaurantItem restaurant, BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -138,7 +188,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
     );
   }
 
-  _buildDescription(Restaurant restaurant, BuildContext context) {
+  _buildDescription(DetaiLRestaurantItem restaurant, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

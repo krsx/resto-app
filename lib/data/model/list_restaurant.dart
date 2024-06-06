@@ -15,7 +15,7 @@ class ListRestaurant {
   bool error;
   String message;
   int count;
-  List<Restaurant> restaurants;
+  List<ListRestaurantItem> restaurants;
 
   ListRestaurant({
     required this.error,
@@ -28,10 +28,10 @@ class ListRestaurant {
         error: json["error"],
         message: json["message"],
         count: json["count"],
-        restaurants: List<Restaurant>.from(
+        restaurants: List<ListRestaurantItem>.from(
           json["restaurants"]
               .map(
-                (x) => Restaurant.fromJson(x),
+                (x) => ListRestaurantItem.fromJson(x),
               )
               .where(
                 (element) => element.id != null,

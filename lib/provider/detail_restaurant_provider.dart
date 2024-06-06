@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resto_app/data/api/api_service.dart';
+import 'package:flutter_resto_app/data/remote/api_service.dart';
 import 'package:flutter_resto_app/data/model/detail_restaurant.dart';
 import 'package:flutter_resto_app/provider/result_state.dart';
 

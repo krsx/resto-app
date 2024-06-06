@@ -14,27 +14,27 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget _buildList() {
     return Consumer<RestaurantProvider>(
-      builder: (context, state, child) {
-        if (state.state == ResultState.Loading) {
+      builder: (context, provider, child) {
+        if (provider.state == ResultState.Loading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state.state == ResultState.HasData) {
+        } else if (provider.state == ResultState.HasData) {
           return ListView.builder(
             shrinkWrap: true,
-            itemCount: state.restaurantResult.restaurants.length,
+            itemCount: provider.restaurantResult.restaurants.length,
             itemBuilder: (context, index) {
-              final restaurant = state.restaurantResult.restaurants[index];
+              final restaurant = provider.restaurantResult.restaurants[index];
               return RestaurantCard(restaurant: restaurant);
             },
           );
-        } else if (state.state == ResultState.NoData) {
+        } else if (provider.state == ResultState.NoData) {
           return Center(
-            child: Text(state.message),
+            child: Text(provider.message),
           );
-        } else if (state.state == ResultState.Error) {
+        } else if (provider.state == ResultState.Error) {
           return Center(
-            child: Text(state.message),
+            child: Text(provider.message),
           );
         } else {
           return const Center(

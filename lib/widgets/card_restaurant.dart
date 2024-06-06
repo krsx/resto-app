@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resto_app/data/model/restaurant.dart';
 
 class RestaurantCard extends StatelessWidget {
-  final Restaurant restaurant;
+  final ListRestaurantItem restaurant;
 
   const RestaurantCard({super.key, required this.restaurant});
 
